@@ -1,0 +1,31 @@
+<div>
+  <div class="mb-4">
+    <app-head-list [exam_soon]="exam_soon"></app-head-list>
+  </div>
+  <div class="h-[300px] overflow-x-hidden overflow-y-auto">
+    @if (loading) {
+      <app-list-item-skeleton></app-list-item-skeleton>
+      <app-list-item-skeleton></app-list-item-skeleton>
+      <app-list-item-skeleton></app-list-item-skeleton>
+      <app-list-item-skeleton></app-list-item-skeleton>
+      <app-list-item-skeleton></app-list-item-skeleton>
+    } 
+    
+    @if (!loading && !error && exams.length === 0) {
+    <p>Aucun examen.</p>
+    }
+
+
+    <app-list-item
+     *ngFor="let item of exams"
+     [exam] = "item"
+    ></app-list-item>
+  </div>
+  <div class="flex justify-end mt-6 me-4">
+    <app-pagination
+        [totalItems]="total"
+        [pageSize]="pageSize"
+        [currentPage]="currentPage"
+    ></app-pagination>
+  </div>
+</div>

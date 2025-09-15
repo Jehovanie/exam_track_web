@@ -1,0 +1,19 @@
+<div class="w-full">
+  <div class="mb-4">
+    <app-banner-statistique
+      [exam_stats]="ex_s.examStats()"
+      [loading]="ex_s.loadingStat()"
+    ></app-banner-statistique>
+  </div>
+  <div>
+    <app-list-exam 
+      [exams]="ex_s.examCurrentList()"
+      [currentPage]="ex_s.examCurrentPage()"
+      [pageSize]="ex_s.dataExamsPublic().itemsPerPage"
+      [loading]="ex_s.loadingListPublic()"
+      [error]="ex_s.error()"
+      [total]="ex_s.examStats().total"
+      [exam_soon]="ex_s.totalExamSoon()"
+    ></app-list-exam>
+  </div>
+</div>

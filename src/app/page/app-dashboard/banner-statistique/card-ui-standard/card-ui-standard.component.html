@@ -1,0 +1,30 @@
+<!-- Card: Confirmé -->
+<div *ngIf="!loading" class="w-[200px] h-[130px] rounded-sm border border-gray-200 bg-white py-4 px-8 shadow-sm flex justify-center items-center">
+  <div class="w-full">
+    <!-- Titre + valeur -->
+    <div class="h-8">
+        <p class="text-md  font-medium text-gray-400 leading-tight ">{{dataCard.title}}</p>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <p class="mt-1 text-3xl font-bold text-emerald-500" [style.color]="dataCard.color">{{dataCard.count}}</p>
+      <lucide-angular [img]="dataCard.icon" [style.color]="dataCard.color"></lucide-angular>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="loading" class="w-[200px] h-[130px] rounded-sm border border-gray-200 bg-white py-4 px-8 shadow-sm flex justify-center items-center">
+  <div class="w-full animate-pulse">
+    <!-- Skeleton titre -->
+    <div class="h-8 mb-2">
+      <div class="h-4 w-24 rounded bg-gray-200"></div>
+    </div>
+
+    <!-- Skeleton valeur + icône -->
+    <div class="flex justify-between items-center">
+      <div class="h-8 w-16 rounded bg-gray-200"></div>
+      <div class="h-8 w-8 rounded-full bg-gray-200"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="grid grid-cols-5 rounded-md border border-gray-200 bg-white px-6 py-3 my-2">
+  <!-- Utilisateur -->
+  <div class="flex items-center space-x-2">
+    <lucide-angular
+      [img]="User"
+      class="mr-3 size-4 text-gray-600"
+    ></lucide-angular>
+    <span class="font-medium text-gray-800">{{ exam.studentName }}</span>
+  </div>
+
+  <!-- Statut -->
+  <div class="flex items-center space-x-2">
+    <lucide-angular
+      [img]="MapPin"
+      class="mr-3 size-4 text-gray-600"
+    ></lucide-angular>
+    <span class="text-sm text-gray-500">{{ exam.location }}</span>
+  </div>
+
+  <!-- Date -->
+  <div class="flex items-center space-x-2">
+    <lucide-angular
+      [img]="CalendarDays"
+      class="mr-3 size-4 text-gray-600"
+    ></lucide-angular>
+    <span class="text-sm font-medium text-gray-800">{{
+      exam.date | date : "longDate"
+    }}</span>
+  </div>
+
+  <!-- Heure / état -->
+  <div class="flex items-center justify-center space-x-2">
+    <lucide-angular
+      [img]="Clock4"
+      class="mr-3 size-4 text-gray-600"
+    ></lucide-angular>
+    <span class="text-sm text-gray-500">{{ exam.time | date : "HH:mm" }}</span>
+  </div>
+
+  <!-- Badge Annulé -->
+  <span
+    [class]="
+      'flex items-center justify-center space-x-1 rounded-md px-3 py-1 text-sm font-medium ' +
+      examStatus.textColor +
+      ' ' +
+      examStatus.bgColor
+    "
+  >
+    <lucide-angular
+      [img]="examStatus.icon"
+      [class]="'mr-3 font-bold size-4 ' + examStatus.textColor"
+    ></lucide-angular>
+    <span>{{ examStatus.text }}</span>
+  </span>
+</div>
