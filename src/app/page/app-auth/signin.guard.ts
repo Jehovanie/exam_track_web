@@ -5,9 +5,9 @@ import { Router } from '@angular/router'; // Importez Router
 export const signinGuard: CanActivateFn = (route, state) => {
   const router = inject(Router); // Utilisez 'inject' pour obtenir une instance de Router
   // Vérifiez si l'utilisateur est authentifié (exemple avec localStorage)
-  const isAuthenticated = localStorage.getItem('authToken') === "tay";
+  const isAuthenticated = localStorage.getItem('authToken');
 
-  if (isAuthenticated) {
+  if (!!isAuthenticated) {
     router.navigate(['/dashboard']);
     return false; // Si l'utilisateur est authentifié, autorisez l'accès
   }

@@ -1,8 +1,8 @@
 <div>
-  <div class="mb-4">
+  <div class="mb-2">
     <app-head-list [exam_soon]="exam_soon"></app-head-list>
   </div>
-  <div class="h-[300px] overflow-x-hidden overflow-y-auto">
+  <div class="h-[200px] overflow-x-hidden overflow-y-auto">
     @if (loading) {
       <app-list-item-skeleton></app-list-item-skeleton>
       <app-list-item-skeleton></app-list-item-skeleton>
@@ -21,7 +21,7 @@
      [exam] = "item"
     ></app-list-item>
   </div>
-  <div class="flex justify-end mt-6 me-4">
+  <div class="flex justify-end me-4">
     <app-pagination
         [totalItems]="total"
         [pageSize]="pageSize"

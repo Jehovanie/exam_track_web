@@ -1,9 +1,10 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environements/environement.test';
+import { environment } from '../../../../environements/environement';
 import { throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ExamCreateType, ExamStats, ExamType } from '../../models/exam.type';
+import { AbstractService } from './abrastract.service';
 
 interface ExamPage {
   items: ExamType[];
@@ -20,8 +21,10 @@ interface ParamsFetchExam {
 @Injectable({
   providedIn: 'root',
 })
-export class ExamService {
-  private baseUrl = environment.SERVER_URL;
+export class ExamService extends AbstractService {
+  constructor() {
+    super();
+  }
 
   private readonly dataExams = signal<ExamPage>({
     items: [],
@@ -99,8 +102,6 @@ export class ExamService {
       this.examStats().byStatus.in_search_place
   );
 
-  constructor(private http: HttpClient) {}
-
   setDataExams(
     params: ParamsFetchExam = {
       page: 1,
@@ -110,8 +111,9 @@ export class ExamService {
     const queryString = new URLSearchParams(params as any).toString();
     this.loadingList.set(true);
 
-    this.http
-      .get<ExamPage>(`${this.baseUrl}/exams?${queryString}`)
+    const url = queryString ? `/exams?${queryString}` : `/exams`;
+
+    this.GET<ExamPage>(url)
       .pipe(
         catchError((error) => {
           console.error(
@@ -143,8 +145,7 @@ export class ExamService {
   setDataStatExam() {
     this.loadingStat.set(true);
 
-    this.http
-      .get<ExamStats>(`${this.baseUrl}/exams/stats`)
+    this.GET<ExamStats>(`/exams/stats`)
       .pipe(
         catchError((error) => {
           console.error(
@@ -168,7 +169,7 @@ export class ExamService {
 
   createExam(exam: ExamCreateType) {
     this.loadingAction.set(true);
-    return this.http.post<ExamCreateType>(`${this.baseUrl}/exams`, exam).pipe(
+    return this.POST<ExamCreateType>(`/exams`, exam).pipe(
       tap((response) => {
         this.loadingAction.set(false);
         this.addDataExams(response as ExamType);

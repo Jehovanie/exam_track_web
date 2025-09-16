@@ -13,20 +13,19 @@ import { AuthService } from '../../@core/services/auth/auth.service';
 export class NavBarComponent {
   readonly LogOut = LogOut;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, public au_s: AuthService) {}
 
   // Logout method to remove token and redirect to login page
   logout(): void {
-    this.authService.logout();
+    this.au_s.logout().subscribe({
+      next: () => {
+        this.router.navigate(['/auth/signin']);
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      },
+    })
     // Redirect the user to the signin page
-    this.router.navigate(['/auth/signin']);
   }
 
-  isLoggedIn = false;
-
-  ngOnInit(): void {
-    this.authService.isLoggedIn$.subscribe((status) => {
-      this.isLoggedIn = status;
-    });
-  }
 }

@@ -6,7 +6,7 @@
     <!-- Call-to-action button -->
     <div>
       <button
-        *ngIf="isLoggedIn"
+        *ngIf="au_s.isLoggedIn()"
         (click)="logout()"
         class="rounded-md bg-orange-500 px-2 py-1 text-white hover:bg-red-500 cursor-pointer flex items-center justify-center gap-1"
       >

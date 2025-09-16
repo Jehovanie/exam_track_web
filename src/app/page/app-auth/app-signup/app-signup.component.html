@@ -1,6 +1,10 @@
 <div class="w-2/5 mx-auto rounded-md bg-white p-8 shadow-md">
   <h2 class="mb-6 text-center text-2xl font-bold text-gray-800">Inscription</h2>
 
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="text-green-500 text-center text-sm mb-2">
+    {{ errorMessage }}
+  </div>
   <!-- Form -->
   <div class="space-y-5">
     <!-- Email -->
@@ -12,7 +16,9 @@
         type="email"
         id="email"
         name="email"
-        placeholder="you@example.com"
+        placeholder="admin@admin.com"
+        [disabled]="au_s.loadingLogin()"
+        [(ngModel)]="email"
         required
         class="w-full rounded-md border border-gray-300 px-3 py-1 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -28,6 +34,8 @@
         id="password"
         name="password"
         placeholder="••••••••"
+        [disabled]="au_s.loadingLogin()"
+        [(ngModel)]="password"
         required
         class="w-full rounded-md border border-gray-300 px-3 py-1 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
@@ -35,16 +43,25 @@
 
     <!-- Submit Button -->
     <button
-      class=" w-full rounded-md bg-red-400 px-4 py-1 text-white hover:bg-red-500 cursor-pointer flex items-center justify-center gap-1"
+      [disabled]="au_s.loadingLogin()"
+      (click)="signup()"
+      class="w-full rounded-md bg-red-400 px-4 py-1 text-white hover:bg-red-500 cursor-pointer flex items-center justify-center gap-1"
     >
-      Inscription
+      <lucide-angular
+        *ngIf="au_s.loadingLogin()"
+        [img]="RefreshCcw"
+        class="mr-3 size-5 animate-spin text-white"
+      ></lucide-angular>
+      {{ au_s.loadingLogin() ? "Inscription..." : "S'inscrire" }}
     </button>
   </div>
 
   <!-- Footer -->
   <p class="mt-4 text-right text-sm text-gray-600">
     Vous avez déja un compte?
-    <a href="/auth/signin" class="font-medium text-red-400 hover:underline"
+    <a
+      routerLink="/auth/signin"
+      class="font-medium text-red-400 hover:underline"
       >Connecter ici</a
     >
   </p>

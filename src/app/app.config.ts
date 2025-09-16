@@ -10,9 +10,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withFetch()),
     provideSweetAlert2({
-      // Optional configuration
       fireOnInit: false,
       dismissOnDestroy: true,
-    }),
+    })
   ],
 };
